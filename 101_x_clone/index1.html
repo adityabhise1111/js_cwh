@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+
+<body class="bg-black text-white ">
+    <!-- Centered wrapper like Twitter -->
+    <div class="flex justify-center">
+        <!-- Main content container -->
+        <div class="w-full max-w-5xl flex flex-row gap-4 px-4">
+
+            <div class="first  w-1/15 p-4">
+                <div class="logo mb-4 my-4  ">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" class="w-6 h-6 fill-white">
+                        <g>
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+                            </path>
+                        </g>
+                    </svg>
+                </div>
+                <div class="sidebar text-white flex flex-col gap-4">
+                    <ul class="space-y-2">
+                      <li class="flex items-center gap-2 w-fit px-2 hover:bg-gray-900 rounded-full hover:cursor-pointer px-5 py-2">
+                        <span class="material-symbols-outlined">Explore</span> Explore
+                      </li>
+                      <li class="flex items-center gap-2  w-fit px-2 hover:bg-gray-900 rounded-full hover:cursor-pointer px-5 py-2">
+                        <span class="material-symbols-outlined">Home</span> Home
+                      </li>
+                      <li class="flex items-center gap-2 w-fit px-2 hover:bg-gray-900 rounded-full hover:cursor-pointer px-5 py-2">
+                        <span class="material-symbols-outlined">Search</span> Search
+                      </li>
+                      <li class="flex items-center gap-2 w-fit px-2 hover:bg-gray-900 rounded-full hover:cursor-pointer px-5 py-2">
+                        <span class="material-symbols-outlined">Notifications</span> Notifications
+                      </li>
+                      <li class="flex items-center gap-2 w-fit px-2 hover:bg-gray-900 rounded-full hover:cursor-pointer px-5 py-2">
+                        <span class="material-symbols-outlined">Inbox</span> Inbox
+                      </li>
+                      <li class="flex items-center gap-2 w-fit px-2 hover:bg-gray-900 rounded-full hover:cursor-pointer px-5 py-2">
+                        <svg viewBox="0 0 42 42" aria-hidden="true" class="w-6 h-6 fill-white">
+                          <g><path clip-rule="evenodd" d="M8 0C3.582 0 0 3.582 0 8v26c0 4.418 3.582 8 8 8h26c4.418 0 8-3.582 8-8V8c0-4.418-3.582-8-8-8H8zm19.997 17.35l-11.1 8.19 15.9-15.963v.015L37.391 5c-.082.117-.165.23-.248.345-3.49 4.804-5.194 7.153-3.826 13.03l-.009-.008c.943 4.001-.065 8.438-3.322 11.693-4.106 4.107-10.677 5.02-16.087 1.324l3.772-1.745c3.454 1.355 7.232.76 9.947-1.954 2.716-2.714 3.325-6.666 1.96-9.956-.259-.623-1.037-.78-1.58-.378zm-13.292-2.574c-3.314 3.31-3.983 9.047-.1 12.755l-.003.003L4 37c.663-.913 1.485-1.776 2.306-2.639l.04-.042c2.346-2.464 4.67-4.906 3.25-8.357-1.903-4.622-.795-10.038 2.73-13.56 3.664-3.66 9.06-4.583 13.568-2.729.998.37 1.867.897 2.545 1.387l-3.764 1.737c-3.505-1.47-7.52-.47-9.97 1.98z"></path></g>
+                        </svg> Grok
+                      </li>
+                      <li class="flex items-center gap-2 w-fit px-2 hover:bg-gray-900 rounded-full hover:cursor-pointer px-5 py-2">
+                        <span class="material-symbols-outlined">group</span> community
+                      </li>
+                      <li class="flex items-center gap-2 w-fit px-2 hover:bg-gray-900 rounded-full hover:cursor-pointer px-5 py-2">
+                        <span class="material-symbols-outlined">person</span> profile
+                      </li>
+                      <li class="flex items-center gap-2 w-fit px-2 hover:bg-gray-900 rounded-full hover:cursor-pointer px-5 py-2">
+                        <span class="material-symbols-outlined">more_horiz</span> more
+                      </li>
+                      <li class="flex items-center gap-2 w-fit px-2 hover:bg-gray-900 rounded-full hover:cursor-pointer px-5 py-2">
+                        <span class="material-symbols-outlined">note_stack_add</span> post
+                      </li>
+                    </ul>
+                  </div>
+                  
+            </div>
+
+            <div class="second  w-1/2 p-4 border border-white border-y-black">Main Feed</div>
+
+            <div class="third  w-full h-1 p-4">Sidebar
+              <div class="search  m-3">
+                <input type="text" class="w-1/2 rounded-full bg-gray-900 text-white p-11 py-2 px-4" placeholder="Search" id="">
+              </div>
+              <div class="subscribe w-1/2 rounded-full bg-gray-900 text-white m-2 p-11 py-2 px-4">Subscribe</div>
+              <div class="whats m-3 rounded-xl p-5 bg-gray-900  w-1/2">
+                <h1 class="text-xl bg-gray-900 w-1/2 font-bold rounded-full p-11 py-2 px-4">Whats Happening
+                  <div class="items my-3 text-sm hover:bg-gray-800 rounded-xl p-5   cursor-pointer">
+                    <div class="font-bold text-sm text-gray-600">Trending in India</div>
+                    <div class="text-sm">#Grok</div>
+                    <div class="text-sm">Trending with 1.2M Tweets</div>
+                    <div class="text-sm">#Grok is a new AI tool g.</div>
+                  </div>
+                </h1>
+              </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
