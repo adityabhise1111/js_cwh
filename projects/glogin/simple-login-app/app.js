@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const bcrypt = require('bcrypt');
 const app = express();
 const users = []; // We'll store registered users here temporarily
 
@@ -22,7 +23,7 @@ app.get('/register', (req, res) => {
     res.render('register');
 });
 
-app.post('/register', (req, res) => {
+app.post('/register', async(req, res) => {
     const { email, password } = req.body;
   
     // Check if user already exists
@@ -31,8 +32,11 @@ app.post('/register', (req, res) => {
       return res.send('User already exists!');
     }
   
-    // Add new user
-    users.push({ email, password });
+     // Hash the password
+  const hashedPassword = await bcrypt.hash(password, 10); // 10 = salt rounds
+
+  // Save user with hashed password
+  users.push({ email, password: hashedPassword });
     
     res.redirect('/login'); // Redirect to login page after registration
   });
@@ -48,27 +52,26 @@ app.post('/register', (req, res) => {
     res.render('login');
   });
   // POST /login route to handle login form submission
-app.post('/login', (req, res) => {
+  app.post('/login', async (req, res) => {
     const { email, password } = req.body;
-
-    // Check if user exists
-    const user = users.find(user => user.email === email);
-
+  
+    // Find user by email
+    const user = users.find(u => u.email === email);
     if (!user) {
-        return res.send('User not found!');
+      return res.send('User not found!');
     }
-
-    // Check if the password matches
-    if (user.password !== password) {
-        return res.send('Incorrect password!');
+  
+    // Compare plain password with hashed password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.send('Incorrect password!');
     }
-
-    // If the credentials are correct, save the user ID to the session
+  
+    // If matched, create session
     req.session.userId = user.email;
-
-    // Redirect to home page after successful login
     res.redirect('/home');
-});
+  });
+  
 app.get('/logout', (req, res) => {
     req.session.destroy((err) => {
       if (err) {
