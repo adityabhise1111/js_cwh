@@ -1,13 +1,27 @@
 const express = require('express');
 const session = require('express-session');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose');  // Import mongoose for MongoDB
+const bodyParser = require('body-parser');  // To parse form data
 const app = express();
-const users = []; // We'll store registered users here temporarily
+//const users = []; // We'll store registered users here temporarily
 
+
+// MongoDB connection (replace with your MongoDB URI)
+mongoose.connect('mongourl', { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.log('Error connecting to MongoDB:', err));
+
+// Define User schema and model
+const userSchema = new mongoose.Schema({
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+});
+const User = mongoose.model('User', userSchema);
 
 app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: true }));
 
+app.use(bodyParser.urlencoded({ extended: false })); // Middleware to parse form data
 app.use(session({
     secret: 'secretkey',
     resave: false,
@@ -27,7 +41,7 @@ app.post('/register', async(req, res) => {
     const { email, password } = req.body;
   
     // Check if user already exists
-    const exists = users.find(user => user.email === email);
+    const exists = await User.findOne({ email });
     if (exists) {
       return res.send('User already exists!');
     }
@@ -36,7 +50,8 @@ app.post('/register', async(req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10); // 10 = salt rounds
 
   // Save user with hashed password
-  users.push({ email, password: hashedPassword });
+  const newUser = new User({ email, password: hashedPassword });
+  await newUser.save();
     
     res.redirect('/login'); // Redirect to login page after registration
   });
@@ -56,7 +71,7 @@ app.post('/register', async(req, res) => {
     const { email, password } = req.body;
   
     // Find user by email
-    const user = users.find(u => u.email === email);
+    const user = await User.findOne({ email });
     if (!user) {
       return res.send('User not found!');
     }
