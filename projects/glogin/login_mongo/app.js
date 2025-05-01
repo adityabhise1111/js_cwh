@@ -5,6 +5,9 @@ import {User} from "./models/User.js";
 import session  from "express-session";
 import bcrypt from "bcryptjs";
 import bodyParser from "body-parser";  // To parse form data
+import { body, validationResult } from 'express-validator';
+import MongoStore from 'connect-mongo'; // <-- add this import
+
 
 dotenv.config();
 
@@ -21,11 +24,22 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(bodyParser.json()); // Parse JSON bodies
 
+// app.use(session({
+//     secret: 'secretkey',
+//     resave: false,
+//     saveUninitialized: false
+//   })); saves in memory, not in mongoDB
+// Middleware to serve static files (like CSS, JS, etc.)
+
 app.use(session({
-    secret: 'secretkey',
-    resave: false,
-    saveUninitialized: false
-  }));
+  secret: 'secretkey',
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URL, // uses your existing MongoDB connection string
+    collectionName: 'sessions'       // optional: name of the collection in MongoDB
+  })
+}));
 
 app.get('/', (req, res) => {
   res.redirect('/home');
@@ -36,24 +50,30 @@ app.get('/register', (req, res) => {
     res.render('register');
 });
 
-app.post('/register', async(req, res) => {
-    const { email, password } = req.body;
-  
-    // Check if user already exists
-    const exists = await User.findOne({ email });
-    if (exists) {
-      return res.send('User already exists!');
-    }
-  
-     // Hash the password
-  const hashedPassword = await bcrypt.hash(password, 10); // 10 = salt rounds
 
-  // Save user with hashed password
-  const newUser = new User({ email, password: hashedPassword });
-  await newUser.save();
+
+app.post('/register', 
+  [
+    body('email').isEmail().withMessage('Enter a valid email'),
+    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters')
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.send(errors.array().map(err => err.msg).join('<br>'));
+    }
+
+    const { email, password } = req.body;
+    const exists = await User.findOne({ email });
+    if (exists) return res.send('User already exists!');
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ email, password: hashedPassword });
+    await newUser.save();
     
-    res.redirect('/login'); // Redirect to login page after registration
-  });
+    res.redirect('/login');
+});
+
 
   app.get('/home', (req, res) => {
     if (!req.session.userId) {
