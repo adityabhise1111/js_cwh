@@ -9,6 +9,7 @@ import { body, validationResult } from 'express-validator';
 import MongoStore from 'connect-mongo'; // <-- add this import
 import passport from 'passport';
 import { initialize } from './passport-config.js';
+import { log } from "console";
 
 dotenv.config();
 

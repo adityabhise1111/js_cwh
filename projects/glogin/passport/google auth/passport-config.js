@@ -1,13 +1,13 @@
 // passport-config.js
 
 import dotenv from 'dotenv';
-dotenv.config();
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { User } from './models/User.js';
 import bcrypt from 'bcryptjs';
 
+dotenv.config();
 
 export function initialize(passport) {
   // Define the local strategy
@@ -36,8 +36,8 @@ export function initialize(passport) {
 
    // GOOGLE STRATEGY
    passport.use(new GoogleStrategy({
-    clientID: "11705801686-n8mlm6cpl07ovi39a9uqg3bhvchsfs9q.apps.googleusercontent.com",
-    clientSecret: "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",
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret:  process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: '/auth/google/callback'
   },
   async (accessToken, refreshToken, profile, done) => {
@@ -80,3 +80,4 @@ export function initialize(passport) {
 
 // console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID);
 // console.log('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET);
+// console.log('MONGO_URL:', process.env.MONGO_URL);
