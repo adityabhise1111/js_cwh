@@ -7,7 +7,8 @@ import bcrypt from "bcryptjs";
 import bodyParser from "body-parser";  // To parse form data
 import { body, validationResult } from 'express-validator';
 import MongoStore from 'connect-mongo'; // <-- add this import
-
+//import passport from 'passport';
+//import { initialize } from './passport-config.js';
 
 dotenv.config();
 
@@ -21,8 +22,8 @@ const port = 3000
 app.set('view engine', 'ejs');
 
 // Middleware to parse request bodies
-app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
-app.use(bodyParser.json()); // Parse JSON bodies
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // app.use(session({
 //     secret: 'secretkey',
