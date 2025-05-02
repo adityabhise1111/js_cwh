@@ -26,6 +26,8 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "@types/node": "^18.19.87",
+    "nodemon": "^3.1.10",
+    "typescript": "^5.8.3"
   }
 }

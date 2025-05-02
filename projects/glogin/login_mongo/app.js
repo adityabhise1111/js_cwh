@@ -8,7 +8,7 @@ import bodyParser from "body-parser";  // To parse form data
 import { body, validationResult } from 'express-validator';
 import MongoStore from 'connect-mongo'; // <-- add this import
 //import passport from 'passport';
-//import { initialize } from './passport-config.js';
+// import { initialize } from './passport-config.js';
 
 dotenv.config();
 
@@ -103,7 +103,8 @@ app.post('/register',
     }
   
     // If matched, create session
-    req.session.userId = user.email;
+    req.session.userId = user._id.toString();
+
     res.redirect('/home');
   });
   
