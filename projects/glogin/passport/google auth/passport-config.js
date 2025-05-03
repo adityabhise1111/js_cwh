@@ -42,11 +42,36 @@ export function initialize(passport) {
   },
   async (accessToken, refreshToken, profile, done) => {
     try {
-      const existingUser = await User.findOne({ googleId: profile.id });
+      // const existingUser = await User.findOne({ googleId: profile.id });
 
-      if (existingUser) {
-        return done(null, existingUser);
+      // if (existingUser) {
+      //   return done(null, existingUser);
+      // }
+
+
+      const email = profile.emails[0].value;
+
+      // 🔍 Check if user already exists by email
+      let user = await User.findOne({ email });
+  
+      if (user) {
+        // ✅ User exists — update googleId if not already set
+        if (!user.googleId) {
+          user.googleId = profile.id;
+          await user.save();
+        }
+        return done(null, user);
       }
+
+
+
+
+
+
+
+
+
+
 
       // If new user, create one
       const newUser = new User({

@@ -88,7 +88,7 @@ app.post('/register',
 
 //passport login route
 app.get('/login', (req, res) => {
-  res.render('login');
+  res.render('login-improved');
 });
 
 // POST /login route to handle login form submission
