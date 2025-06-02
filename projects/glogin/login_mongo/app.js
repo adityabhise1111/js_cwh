@@ -1,23 +1,20 @@
-const express = require('express');
-const session = require('express-session');
-const bcrypt = require('bcryptjs');
-const mongoose = require('mongoose');  // Import mongoose for MongoDB
-const bodyParser = require('body-parser');  // To parse form data
+import mongoose from "mongoose";
+import express from "express";
+import {User} from "./models/User.js";
+let conn = await mongoose.connect("mongodb://localhost:27017/User")
+import session from "express";
+import express from "'express-session";
+import bcrypt from "bcryptjs";
+import bodyParser from "body-parser";
+import session from "express";
+import express from "'express-session";
+import session from "express";
+import express from "'express-session";
 const app = express();
 //const users = []; // We'll store registered users here temporarily
 
+require('dotenv').config();
 
-// MongoDB connection (replace with your MongoDB URI)
-mongoose.connect('mongourl', { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.log('Error connecting to MongoDB:', err));
-
-// Define User schema and model
-const userSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-});
-const User = mongoose.model('User', userSchema);
 
 app.set('view engine', 'ejs');
 
@@ -96,7 +93,7 @@ app.get('/logout', (req, res) => {
     });
   });
   
-
+z
 app.listen(3000, () => {
   console.log('Server is running at http://localhost:3000');
 });
