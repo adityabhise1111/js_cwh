@@ -18,6 +18,10 @@ function App() {
   //so if you want to trigger a re-render when the value changes, you should use
   //useState instead 
 
+  // two used of the useRef hook:
+  // 1. to keep track of a mutable value that does not require re-rendering
+  // 2. to access a DOM element directly without using state
+
 
   const btnRef = useRef()
   useEffect(() => {
