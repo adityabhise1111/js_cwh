@@ -1,0 +1,25 @@
+.card{
+    font-weight: 100;
+    font-size: 1.2rem;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    flex: auto;
+    margin: 10px 0;
+
+}
+
+.id{
+    font-weight: bold;
+    color: #333;
+
+}
+.title{
+    font-weight: bold;
+    color: #007bff;
+}
+
+.body{
+    font-weight: 100;
+    color: #666;
+}
