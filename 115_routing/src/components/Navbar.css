@@ -28,8 +28,15 @@ a li{
     color: white;
 }
 
-red{
+.red{
     color: white;
    
     background-color: red;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem; /* optional: space between items */
 }
