@@ -17,13 +17,24 @@ function App() {
 
    const handleDelete = (id) => {
     console.log("Delete button clicked");
-    let index = todos.findIndex((item) => {
-      return item.id === id;
-    })
-    console.log(index)
 
-    let newTodo = [...todos];
-    newTodo.splice(index,1);
+
+
+    // let index = todos.findIndex((item) => {
+    //   return item.id === id;
+    // })
+    // console.log(index)
+
+    // let newTodo = [...todos];
+    // newTodo.splice(index,1);
+    
+    let newTodo = todos.filter((item) =>(
+      item.id !== id
+    ))
+
+    
+    
+    
     setTodos(newTodo);
     console.log(newTodo)
    }
@@ -65,8 +76,8 @@ function App() {
             <div className="addTodo">
               <h2 className="text-lg font-bold">Add ToDo</h2>
               <div className="flex">
-                <input type="text" onChange={()=>handleChange} value={todo} name="" id="" />
-                <Button text="Add" value onClick={()=>handleAdd} />
+                <input type="text" onChange={handleChange} value={todo} name="" id="" />
+                <Button text="Add" value onClick={handleAdd} />
               </div>
             </div>
             <h2 className='text-xl font-bold'>Your ToDo</h2>
