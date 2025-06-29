@@ -2,6 +2,7 @@ import React from 'react';
 import Button from './Button'; // Reuse your existing button component
 import { useContext } from 'react';
 import { TodoContext } from '../context/TodoContext';
+import { GiBladeBite } from "react-icons/gi";
 
 
 const Empty = ({ todo, handleChange, handleAdd }) => {
@@ -19,7 +20,7 @@ const Empty = ({ todo, handleChange, handleAdd }) => {
                         placeholder="Enter your task..."
                         className="flex-1 px-4 py-2 rounded-xl border-2 border-violet-400 focus:outline-none focus:ring-2 focus:ring-violet-600"
                     />
-                    <Button text="Add" onClick={handleAdd} />
+                    <Button text={<GiBladeBite />} onClick={handleAdd} />
                 </div>
             </div>
         </div>

@@ -6,52 +6,51 @@ import Todo from './components/Todo';
 import { TodoContext } from './context/TodoContext';
 import { v4 as uuidv4 } from 'uuid';
 
+
 function App() {
-  // Initialize todos state with data from localStorage or an empty array.
-  // This function runs only once during the initial render.
   const [todos, setTodos] = useState(() => {
     const storedTodos = localStorage.getItem("todos");
     return storedTodos ? JSON.parse(storedTodos) : [];
   });
 
-  // State for the current todo input.
-  const [todo, setTodo] = useState(""); // Initialize with an empty string for new todos
+  const [todo, setTodo] = useState("Wanna Go Home"); // Initialize with an empty string for new todos
+  const [toggleTick, settoggleTick] = useState(true)
 
-  // This useEffect hook saves the 'todos' array to localStorage
-  // whenever the 'todos' state changes.
+  useEffect(() => {
+  
+    console.log(toggleTick)
+  }, [toggleTick])
+  
   useEffect(() => {
     console.log("Saving todos to localStorage", todos);
     localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]); // Dependency array ensures this runs only when 'todos' changes
+  }, [todos]);
 
-  // Handles editing a todo item.
   const handleEdit = (id) => {
-    // Find the todo item to be edited.
+
     let mytodo = todos.filter(item => item.id === id);
-    // Set the input field to the text of the todo being edited.
+
     setTodo(mytodo[0].todo);
 
-    // Remove the original todo item from the list.
+
     let newTodo = todos.filter((item) => item.id !== id);
     setTodos(newTodo);
   };
 
-  // Handles deleting a todo item.
+
   const handleDelete = (id) => {
     const deleteConfirmed = window.confirm("Are you sure you want to delete this item?");
     if (deleteConfirmed) {
-      // Filter out the todo item with the matching ID.
+
       let newTodo = todos.filter((item) => item.id !== id);
       setTodos(newTodo);
     }
   };
 
-  // Handles adding a new todo item.
   const handleAdd = () => {
-    if (todo.trim() === "") { // Prevent adding empty todos
+    if (todo.trim() === "") {
       return;
     }
-    // Add a new todo with a unique ID, the current input value, and isCompleted set to false.
     setTodos([...todos, { id: uuidv4(), todo, isCompleted: false }]);
     // Clear the input field after adding.
     setTodo("");
@@ -62,16 +61,14 @@ function App() {
     setTodo(e.target.value);
   };
 
-  // Handles toggling the completion status of a todo item.
   const handleCheckBox = (id) => {
-    // Find the index of the todo item.
     let index = todos.findIndex((item) => item.id === id);
-    // Create a mutable copy of the todos array.
     let newTodos = [...todos];
-    // Toggle the isCompleted status.
     newTodos[index].isCompleted = !newTodos[index].isCompleted;
     setTodos(newTodos);
   };
+
+  
 
   return (
     <>
@@ -80,9 +77,10 @@ function App() {
         <Navbar />
         {todos.length !== 0 ? (
           <>
-            <div className="container mx-auto my-5 rounded-xl p-5 bg-violet-100 min-h-screen">
+            <div className="container mx-auto my-5 rounded-xl p-5 bg-violet-100 min-h-[80vh] w-1/2">
               <div className="">
                 <div className="addTodo mb-4"> {/* Added margin-bottom for spacing */}
+                  
                   <h2 className="text-lg font-bold mb-2">Add ToDo</h2> {/* Added margin-bottom */}
                   <form
                     className="flex gap-2" // Added gap for spacing between input and button
@@ -97,11 +95,12 @@ function App() {
                       placeholder="Add a new todo..." // Added a placeholder
                       className="flex-grow p-2 border border-gray-300 rounded-md" // Tailwind classes for styling
                     />
-                    <Button text="Add" type="submit" disabled={todo.trim() === ""} /> {/* Disable if input is empty */}
+                    <Button text="Save" type="submit" disabled={todo.length <= 3} /> {/* Disable if input is empty */}
                   </form>
                 </div>
                 <h2 className='text-xl font-bold mb-3'>Your ToDos</h2> {/* Changed to ToDos and added margin-bottom */}
-                <div className="todos">
+                <div className="todos ">
+                  <input type="checkbox" checked={toggleTick} onChange={() => settoggleTick(!toggleTick)} name="" id="" /><h7>Show Finished</h7>
                   {/* Map through the todos array and render a Todo component for each item */}
                   {
                     todos.map((item) => (
@@ -110,6 +109,7 @@ function App() {
                         isCompleted={item.isCompleted}
                         key={item.id} // Important for React list rendering
                         id={item.id}
+                        toggleTick={toggleTick}
                       />
                     ))
                   }
@@ -120,7 +120,7 @@ function App() {
         ) : (
           // Render the Empty component if there are no todos.
           // The Empty component will now receive `todo` and `handleChange` from context.
-          <Empty 
+          <Empty
             todo={todo}
             handleChange={handleChange}
             handleAdd={handleAdd}

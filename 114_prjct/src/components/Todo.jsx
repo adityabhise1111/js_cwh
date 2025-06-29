@@ -1,25 +1,28 @@
 import React, { useContext } from 'react'
 import Button from './Button'
 import { TodoContext } from '../context/TodoContext'
+import { RiEdit2Fill } from "react-icons/ri";
+import { RiDeleteBin7Fill } from "react-icons/ri";
+import { GiBladeBite } from "react-icons/gi";
 
 
-const Todo = ({text, isCompleted , id }) => {
+const Todo = ({text, isCompleted , id ,toggleTick}) => {
 
     const { handleAdd, handleDelete, handleEdit, handleCheckBox , todo } = useContext(TodoContext)
-    return (
+    return (toggleTick || !isCompleted)&&(
         <div className="todo flex w-1/2 justify-between ">
             <input 
             type="checkbox" 
             name={id} 
-            value={isCompleted} 
+            checked={isCompleted} 
             onChange={()=>handleCheckBox(id)} 
              />
             <div className={isCompleted ? "font-bold line-through " : "font-bold "}>{text}</div>
             <div className="buttons flex">
-                <Button onClick={()=>handleEdit(id)} text="Edit"  />
+                <Button onClick={()=>handleEdit(id)} text={<RiEdit2Fill />}  />
             
             
-                <Button onClick={()=>handleDelete(id)} text="Delete"  />
+                <Button onClick={()=>handleDelete(id)} text={<RiDeleteBin7Fill />}  />
             </div>
         </div>
     )
