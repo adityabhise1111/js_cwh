@@ -70,28 +70,24 @@ const Navbar = () => {
               </button>
 
               {showDropdown && (
-                <div className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-20 bg-white">
-                  <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
+                <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg ring-1 ring-gray-300 ring-opacity-20 focus:outline-none z-50 bg-white border border-gray-200">
+                  <div className="py-2" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
                     <Link
                       href="/dashboard"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       role="menuitem"
-                      onClick={() => setShowDropdown(false)}
+                      onClick={() => {
+                        console.log("Dashboard clicked");
+                        setShowDropdown(false);
+                      }}
                     >
                       Dashboard
                     </Link>
                     <button
-                      onClick={async () => {
+                      onClick={() => {
                         console.log("Sign out clicked");
                         setShowDropdown(false);
-                        try {
-                          await signOut({ 
-                            callbackUrl: '/',
-                            redirect: true 
-                          });
-                        } catch (error) {
-                          console.error("Sign out error:", error);
-                        }
+                        signOut({ callbackUrl: '/' });
                       }}
                       className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
                       role="menuitem"

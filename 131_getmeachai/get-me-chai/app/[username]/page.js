@@ -1,10 +1,12 @@
+import PaymentPage from '@/components/PaymentPage'
 import React from 'react'
 
-const username = ({params}) => {
+
+const username = ({ params }) => {
   return (
-    <div className='text-white h-3'>
-      {params.username}
-    </div>
+    <>
+      <PaymentPage username={params.username} />
+    </>
   )
 }
 
