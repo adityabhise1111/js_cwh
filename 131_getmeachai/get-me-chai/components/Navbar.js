@@ -79,9 +79,20 @@ const Navbar = () => {
                       onClick={() => {
                         console.log("Dashboard clicked");
                         setShowDropdown(false);
+                        }}
+                      >
+                        Dashboard
+                      </Link>
+                      <Link
+                        href={`/${session?.user?.name || 'profile'}`} 
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        role="menuitem"
+                        onClick={() => {
+                        console.log("Dashboard clicked");
+                        setShowDropdown(false);
                       }}
                     >
-                      Dashboard
+                      Your page
                     </Link>
                     <button
                       onClick={() => {

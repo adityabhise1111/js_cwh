@@ -9,7 +9,7 @@ const PaymentSchema = new Schema({
     amount: {type: Number, required: true}, 
     createdAt: {type: Date, required: true, default: Date.now},
     updatedAt: {type: Date, required: true, default: Date.now},
-    Boolean: {type: Boolean, default: false}
+    done: {type: Boolean, default: false}
 });
 
 
