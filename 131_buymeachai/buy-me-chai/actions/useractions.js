@@ -37,6 +37,7 @@ export const fetchUser = async (username) => {
     try {
         await connectDb()
         let udata = await User.findOne({ username: username })
+        console.log("username:", username)
         let user;
         if (udata) {
             //user = udata.toObject({flattenObjectIds: true})
@@ -72,19 +73,26 @@ export const fetchDonePayments = async (username) => {
 
 export const updateProfile = async (data, oldUsername) => {
     await connectDb()
-    try{
+    try {
         let newdata = data
+        console.log("new username:", newdata.username)
+        console.log("old username:", oldUsername)
 
         if (newdata.username !== oldUsername) {
-            // Check if the new username already exists
-            let existingUser = await User.findOne({ username: newdata.username })
+            // Check if the new username exists AND belongs to someone else
+            let existingUser = await User.findOne({
+                username: newdata.username,
+                email: { $ne: newdata.email }, // Exclude current user
+            })
             if (existingUser) {
                 throw new Error("Username already exists")
             }
         }
 
-        await User.updateOne({email: newdata.email}, newdata)
-    }catch (error) {
+
+        await User.updateOne({ email: newdata.email }, newdata)
+        return { success: true, data: newdata }
+    } catch (error) {
         console.error("Error in updateProfile:", error)
         throw new Error(`Profile update failed: ${error.message}`)
     }

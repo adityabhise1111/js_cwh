@@ -3,10 +3,12 @@ const {Schema , model} = mongoose;
 
 const UserSchema = new Schema({
     name: {type: String},
-    email: {type: String, required: true, unique: true},
     username: {type: String, required: true, unique: true},
+    email: {type: String, required: true, unique: true},
     profilePicture: {type: String},
     coverPicture: {type: String},
+    razorpayId: {type: String, required: true, unique: true},
+    razorpaySecret: {type: String, required: true},
     createdAt: {type: Date, required: true, default: Date.now},
     updatedAt: {type: Date, required: true, default: Date.now}
 });

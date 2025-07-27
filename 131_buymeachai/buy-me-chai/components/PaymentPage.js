@@ -157,13 +157,13 @@ const PaymentPage = ({ username }) => {
             <div className='cover w-full  relative '>
                 {username}
                 <img className='object-cover w-full h-[250px]'
-                    src="https://c10.patreonusercontent.com/4/patreon-media/p/campaign/8289103/46bf2753989b49ec97a9339d21f39c18/eyJ3IjoxOTIwLCJ3ZSI6MX0%3D/1.jpg?token-hash=Umd3b9tkkP9OUg_b3SFZUtAd8btLm_Vesy7NKum7kB4%3D&amp;token-time=1754265600"
-                    alt="" />
+                    src={currentUser.coverPicture}
+                    alt="coverPicture" />
                 <div className="absolute -bottom-14 right-[46.5%] p-[6px] rounded-full bg-white shadow-[0_0_30px_rgba(255,255,255,0.6)] ring-2 ring-white">
                     <div className="rounded-full bg-black p-[2px]">
                         <img
                             className="rounded-full w-[100px] h-[100px] object-cover border-4 border-white"
-                            src="dogesh.jpeg"
+                            src={currentUser.profilePicture}
                             alt="User profile"
                         />
                     </div>

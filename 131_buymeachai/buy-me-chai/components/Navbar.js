@@ -26,7 +26,7 @@ const Navbar = () => {
   return (
     <nav className='bg-black text-white shadow-md w-full'>
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
-        <div className="text-2xl font-bold text-white">GetMeChai</div>
+        <div className="text-2xl font-bold text-white">BuyMeChai</div>
         <ul className="flex space-x-8">
           <li>
             <Link href="/" className="text-white hover:text-indigo-400 transition-colors duration-200">Home</Link>

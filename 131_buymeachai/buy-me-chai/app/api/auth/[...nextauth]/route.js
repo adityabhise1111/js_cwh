@@ -20,10 +20,10 @@ export const authOptions = {
         //     clientId: process.env.FACEBOOK_ID,
         //     clientSecret: process.env.FACEBOOK_SECRET
         // }),
-        // GoogleProvider({
-        //     clientId: process.env.GOOGLE_ID,
-        //     clientSecret: process.env.GOOGLE_SECRET
-        // }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_ID,
+            clientSecret: process.env.GOOGLE_SECRET
+        }),
         // // Passwordless / email sign in
         // EmailProvider({
         //     server: process.env.MAIL_SERVER,
@@ -55,7 +55,23 @@ export const authOptions = {
                     user.name = newUser.username
                 }
                 return true;
+            }    
+            if (account.provider === 'google') {
+                //connect to the data base
+                const client = await mongoose.connect(process.env.MONGO_URI)
 
+                //check if the user already exists
+                const currentUser = await User.findOne({ email: profile.email })
+                if (!currentUser) {
+                    //create a new user
+                    const newUser = await User.create({
+                        email: profile.email,
+                        username: profile.email ? profile.email.split('@')[0] : 'user',
+                    })
+                    await newUser.save()
+                    user.name = newUser.username
+                }
+                return true;
             }
         },
         async session({ session, token, user }) {
