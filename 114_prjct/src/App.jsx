@@ -52,7 +52,7 @@ function App() {
       return;
     }
     setTodos([...todos, { id: uuidv4(), todo, isCompleted: false }]);
-    // Clear the input field after adding.
+    // Clear the input field after addingffff.
     setTodo("");
   };
 
