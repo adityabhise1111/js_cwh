@@ -32,13 +32,13 @@ const PaymentPage = ({ username }) => {
         try {
             let u = await fetchUser(username)
             if(u){ setcurrentUser(u) }else {throw new Error("User not found")}
-            console.log("Current User:", u); // Debug log
+            // console.log("Current User:", u); // Debug log
 
             let p = await fetchDonePayments(username)
             if(p){ setpayments(p) }else {throw new Error("Payments not found")}
-            console.log("Payments:", p); // Debug log
+            // console.log("Payments:", p); // Debug log
         } catch (error) {
-            console.error("Error fetching user data:", error);
+            // console.error("Error fetching user data:", error);
         }
     }
 
@@ -142,7 +142,7 @@ const PaymentPage = ({ username }) => {
             rzp1.open();
 
         } catch (error) {
-            console.error("Payment error:", error);
+            // console.error("Payment error:", error);
             alert(`Payment failed: ${error.message}`);
         }
     }

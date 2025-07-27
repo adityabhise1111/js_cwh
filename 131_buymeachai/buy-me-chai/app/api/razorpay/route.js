@@ -11,11 +11,11 @@ export const POST = async (request) => {
         let body = await request.formData();
         body = Object.fromEntries(body);
 
-        console.log('Received payment data:', body); // Debug log
-        console.log('Environment check:', {
-            hasRazorpaySecret: !!process.env.RAZORPAY_SECRET,
-            hasNextAuthUrl: !!process.env.NEXTAUTH_URL
-        });
+        // console.log('Received payment data:', body); // Debug log
+        // console.log('Environment check:', {
+        //     hasRazorpaySecret: !!process.env.RAZORPAY_SECRET,
+        //     hasNextAuthUrl: !!process.env.NEXTAUTH_URL
+        // });
 
         //check if the payment is valid
         let p = await Payment.findOne({ orderId: body.razorpay_order_id });
@@ -37,19 +37,19 @@ export const POST = async (request) => {
             process.env.RAZORPAY_SECRET
         );
 
-        console.log('Payment verification result:', isValid); // Debug log
+        // console.log('Payment verification result:', isValid); // Debug log
 
         if (isValid) {
-            console.log('Payment verified, updating database...'); // Debug log
+            // console.log('Payment verified, updating database...'); // Debug log
             const updatedPayment = await Payment.findOneAndUpdate(
                 { orderId: body.razorpay_order_id },
                 { done: true },
                 { new: true }
             );
-            console.log('Updated payment:', updatedPayment); // Debug log
+            // console.log('Updated payment:', updatedPayment); // Debug log
 
             const redirectUrl = `${process.env.NEXTAUTH_URL}/${updatedPayment.to_user}?paymentdone=true`;
-            console.log('Redirect URL:', redirectUrl); // Debug log
+            // console.log('Redirect URL:', redirectUrl); // Debug log
 
             return NextResponse.redirect(`${process.env.NEXT_PUBLIC_URL}/${updatedPayment.to_user}?paymentdone=true`);
         }
@@ -60,7 +60,7 @@ export const POST = async (request) => {
             }, { status: 400 });
         }
     } catch (error) {
-        console.error('API Error:', error);
+        // console.error('API Error:', error);
         return NextResponse.json({
             success: false,
             error: "Internal server error: " + error.message

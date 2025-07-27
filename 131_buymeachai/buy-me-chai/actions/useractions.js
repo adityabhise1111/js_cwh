@@ -9,7 +9,7 @@ export const initiatePayment = async ({ amount, to_username, paymentform }) => {
         await connectDb()
         var instance = new Razorpay({ key_id: process.env.RAZORPAY_KEY_ID, key_secret: process.env.RAZORPAY_SECRET })
 
-        console.log("to_username:", to_username)
+        // console.log("to_username:", to_username)
 
         let options = {
             amount: Number(amount) * 100, // amount in the smallest currency unit
@@ -28,7 +28,7 @@ export const initiatePayment = async ({ amount, to_username, paymentform }) => {
 
         return x
     } catch (error) {
-        console.error("Error in initiatePayment:", error)
+        // console.error("Error in initiatePayment:", error)
         throw new Error(`Payment initiation failed: ${error.message}`)
     }
 }
@@ -37,7 +37,7 @@ export const fetchUser = async (username) => {
     try {
         await connectDb()
         let udata = await User.findOne({ username: username })
-        console.log("username:", username)
+        // console.log("username:", username)
         let user;
         if (udata) {
             //user = udata.toObject({flattenObjectIds: true})
@@ -47,7 +47,7 @@ export const fetchUser = async (username) => {
         }
         return user
     } catch (error) {
-        console.error("Error in fetchUser:", error)
+        // console.error("Error in fetchUser:", error)
         throw new Error(`User fetching failed: ${error.message}`)
     }
 }
@@ -66,7 +66,7 @@ export const fetchDonePayments = async (username) => {
         return JSON.parse(JSON.stringify(payments));
 
     } catch (error) {
-        console.error("Error in fetchPayment:", error)
+        // console.error("Error in fetchPayment:", error)
         throw new Error(`Payment fetching failed: ${error.message}`)
     }
 }
@@ -75,8 +75,8 @@ export const updateProfile = async (data, oldUsername) => {
     await connectDb()
     try {
         let newdata = data
-        console.log("new username:", newdata.username)
-        console.log("old username:", oldUsername)
+        // console.log("new username:", newdata.username)
+        // console.log("old username:", oldUsername)
 
         if (newdata.username !== oldUsername) {
             // Check if the new username exists AND belongs to someone else
@@ -93,7 +93,7 @@ export const updateProfile = async (data, oldUsername) => {
         await User.updateOne({ email: newdata.email }, newdata)
         return { success: true, data: newdata }
     } catch (error) {
-        console.error("Error in updateProfile:", error)
+        // console.error("Error in updateProfile:", error)
         throw new Error(`Profile update failed: ${error.message}`)
     }
 }

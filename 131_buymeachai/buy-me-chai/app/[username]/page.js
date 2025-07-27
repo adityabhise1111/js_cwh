@@ -22,3 +22,10 @@ export default async function Page({ params }) {
     </>
   );
 }
+
+export async function generateMetadata({ params }) {
+  return {
+    title: `Buy Me A Chai - ${params.username}`,
+    description: `Support ${params.username} by buying them a chai!`,
+  };
+}

@@ -77,7 +77,7 @@ export const authOptions = {
         async session({ session, token, user }) {
             // Send properties to the client, like an access_token and user id from a provider.
             const dbuser = await User.findOne({ email: session.user.email })
-            console.log("DB User:", dbuser)
+            // console.log("DB User:", dbuser)
             session.user.name = dbuser.username
             session.user.email = dbuser.email
 

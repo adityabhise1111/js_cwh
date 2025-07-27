@@ -20,6 +20,8 @@ const page = () => {
     })
 
     useEffect(() => {
+
+        document.title = "Profile Settings - Buy Me A Chai"
         if (!session) {
             router.push('/')
         }
@@ -40,7 +42,7 @@ const page = () => {
         try {
             const response = await updateProfile(form, session.user.username)
             if (response.success) {
-                alert("Profile updated successfully" + JSON.stringify(response.data))
+                alert("Profile updated successfully" )
             } else {
                 throw new Error("Error updating profile" + response.error)
             }
