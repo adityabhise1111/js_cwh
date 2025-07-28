@@ -150,12 +150,12 @@ const PaymentPage = ({ username }) => {
     return (
         <>
 
-            <button id="rzp-button1">Pay</button>
+            {/* <button id="rzp-button1">Pay</button> */}
             <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
 
 
             <div className='cover w-full  relative '>
-                {username}
+                {/* {username} */}
                 <img className='object-cover w-full h-[250px]'
                     src={currentUser.coverPicture}
                     alt="coverPicture" />

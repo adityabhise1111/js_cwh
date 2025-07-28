@@ -4,6 +4,9 @@ import Payment from '@/models/Payment'
 import connectDb from '@/db/connectDB'
 import User from '@/models/User'
 
+
+
+
 export const initiatePayment = async ({ amount, to_username, paymentform }) => {
     try {
         await connectDb()
@@ -72,6 +75,7 @@ export const fetchDonePayments = async (username) => {
 }
 
 export const updateProfile = async (data, oldUsername) => {
+    
     await connectDb()
     try {
         let newdata = data
@@ -91,6 +95,7 @@ export const updateProfile = async (data, oldUsername) => {
 
 
         await User.updateOne({ email: newdata.email }, newdata)
+        
         return { success: true, data: newdata }
     } catch (error) {
         // console.error("Error in updateProfile:", error)

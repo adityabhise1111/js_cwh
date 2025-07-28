@@ -5,6 +5,7 @@ import { updateProfile, fetchUser } from '@/actions/useractions'
 import { useRouter } from 'next/navigation'
 
 
+
 const page = () => {
 
     const { data: session, update } = useSession()
@@ -42,7 +43,9 @@ const page = () => {
         try {
             const response = await updateProfile(form, session.user.username)
             if (response.success) {
+                session.user.name = form.username
                 alert("Profile updated successfully" )
+                router.push(`/${form.username}`)
             } else {
                 throw new Error("Error updating profile" + response.error)
             }
