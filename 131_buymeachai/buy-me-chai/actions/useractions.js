@@ -55,6 +55,18 @@ export const fetchUser = async (username) => {
     }
 }
 
+export const fetchUsers = async () => {
+    try {
+        await connectDb()
+        // Fetch all users from the database who have razorpay credentials
+        let users = await User.find({ razorpaySecret: { $exists: true }, razorpayId: { $exists: true } })
+        return JSON.parse(JSON.stringify(users))
+    } catch (error) {
+        // console.error("Error in fetchUsers:", error)
+        throw new Error(`Users fetching failed: ${error.message}`)
+    }
+}
+
 export const fetchDonePayments = async (username) => {
     try {
         await connectDb()

@@ -4,17 +4,37 @@ import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from 'next/navigation'
 
 
+
 const login = () => {
     const { data: session } = useSession()
     const router = useRouter()
-    
-    useEffect(() => {
 
+    useEffect(() => {
         document.title = "Login - Buy Me A Chai"
+
         if (session) {
-            router.push('/dashboard')
+            fetch('/api/check-user', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: session.user.email })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error)
+                    } else if (!data.hasRazorpayKeys) {
+                        router.push('/dashboard')
+                    } else {
+                        router.push(`/${data.username}`)
+                    }
+                })
+                .catch(err => {
+                    console.error("Error checking user:", err)
+                    alert("Error checking user data")
+                })
         }
     }, [session, router])
+
     return (
         <div className="min-h-screen flex items-center justify-center ">
             <div className="bg-gray-900 rounded-xl shadow-lg p-10 w-full max-w-md">
@@ -39,5 +59,4 @@ const login = () => {
         </div>
     )
 }
-
 export default login
