@@ -7,6 +7,7 @@ import { useSession, signIn, signOut } from "next-auth/react"
 const Navbar = () => {
   const { data: session } = useSession()
   const [showDropdown, setShowDropdown] = useState(false)
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
   const dropdownRef = useRef(null)
 
   // Close dropdown when clicking outside
@@ -23,11 +24,28 @@ const Navbar = () => {
     }
   }, [])
 
+  // Close mobile menu when window is resized to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setShowMobileMenu(false)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   return (
     <nav className='bg-black text-white shadow-md w-full'>
-      <div className="container mx-auto flex items-center justify-between py-4 px-6">
-        <div className="text-2xl font-bold text-white">BuyMeChai</div>
-        <ul className="flex space-x-8">
+      <div className="container mx-auto flex items-center justify-between py-4 px-4 md:px-6">
+        {/* Logo */}
+        <div className="text-xl md:text-2xl font-bold text-white">BuyMeChai</div>
+        
+        {/* Desktop Navigation */}
+        <ul className="hidden md:flex space-x-6 lg:space-x-8">
           <li>
             <Link href="/" className="text-white hover:text-indigo-400 transition-colors duration-200">Home</Link>
           </li>
@@ -41,7 +59,9 @@ const Navbar = () => {
             <Link href="/contact" className="text-white hover:text-indigo-400 transition-colors duration-200">Contact</Link>
           </li>
         </ul>
-        <div>
+
+        {/* Desktop Auth Section */}
+        <div className="hidden md:block">
                {!session && (
                 <div className="inline-block">
                   <Link
@@ -111,7 +131,100 @@ const Navbar = () => {
             </div>
           )}
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden flex items-center px-3 py-2 border rounded text-white border-gray-400 hover:text-indigo-400 hover:border-indigo-400"
+          onClick={() => setShowMobileMenu(!showMobileMenu)}
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {showMobileMenu ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      {showMobileMenu && (
+        <div className="md:hidden bg-gray-900 border-t border-gray-700">
+          <div className="px-4 pt-2 pb-3 space-y-1">
+            <Link
+              href="/"
+              className="block px-3 py-2 text-white hover:text-indigo-400 hover:bg-gray-800 rounded-md"
+              onClick={() => setShowMobileMenu(false)}
+            >
+              Home
+            </Link>
+            <Link
+              href="/about"
+              className="block px-3 py-2 text-white hover:text-indigo-400 hover:bg-gray-800 rounded-md"
+              onClick={() => setShowMobileMenu(false)}
+            >
+              About
+            </Link>
+            <Link
+              href="/menu"
+              className="block px-3 py-2 text-white hover:text-indigo-400 hover:bg-gray-800 rounded-md"
+              onClick={() => setShowMobileMenu(false)}
+            >
+              Menu
+            </Link>
+            <Link
+              href="/contact"
+              className="block px-3 py-2 text-white hover:text-indigo-400 hover:bg-gray-800 rounded-md"
+              onClick={() => setShowMobileMenu(false)}
+            >
+              Contact
+            </Link>
+          </div>
+          
+          {/* Mobile Auth Section */}
+          <div className="pt-4 pb-3 border-t border-gray-700">
+            {!session && (
+              <div className="px-4">
+                <Link
+                  href="/login"
+                  className="block w-full text-center bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition-colors duration-200"
+                  onClick={() => setShowMobileMenu(false)}
+                >
+                  Sign In
+                </Link>
+              </div>
+            )}
+
+            {session && (
+              <div className="px-4 space-y-1">
+                <Link
+                  href="/dashboard"
+                  className="block px-3 py-2 text-white hover:text-indigo-400 hover:bg-gray-800 rounded-md"
+                  onClick={() => setShowMobileMenu(false)}
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  href={`/${session?.user?.name || 'profile'}`}
+                  className="block px-3 py-2 text-white hover:text-indigo-400 hover:bg-gray-800 rounded-md"
+                  onClick={() => setShowMobileMenu(false)}
+                >
+                  Your page
+                </Link>
+                <button
+                  onClick={() => {
+                    setShowMobileMenu(false);
+                    signOut({ callbackUrl: '/' });
+                  }}
+                  className="block w-full text-left px-3 py-2 text-red-400 hover:text-red-300 hover:bg-gray-800 rounded-md"
+                >
+                  Sign out
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   )
 }

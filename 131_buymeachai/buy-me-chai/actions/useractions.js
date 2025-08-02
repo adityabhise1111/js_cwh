@@ -114,3 +114,17 @@ export const updateProfile = async (data, oldUsername) => {
         throw new Error(`Profile update failed: ${error.message}`)
     }
 }
+
+export const findNumberofUsers = async (ff) => {
+    try {
+        await connectDb()
+        // Count the number of users in the database
+        let count = await User.countDocuments()
+        console.log("Number of users:", count)
+        
+        return count
+    } catch (error) {
+        // console.error("Error in findNumberofUsers:", error)
+        throw new Error(`User count fetching failed: ${error.message}`)
+    }
+}
