@@ -37,12 +37,12 @@ function ab (): number {
 
 //unknown 
 
-let a :unknown;
-a = 12;
-a = "aditya";
-if(typeof a === "string"){
+let b :unknown;
+b = 12;
+b = "aditya";
+if(typeof b === "string"){
 
-    a.toUpperCase()
+    b.toUpperCase()
 }
 
 
@@ -53,3 +53,13 @@ if(typeof a === "string"){
 
 
 
+//never 
+
+function errorFunction(): never {
+    throw new Error("This function always throws an error");
+}
+
+errorFunction(); // This will never return,
+//  it always throws an error
+console.log("This line will never be reached");
+// This line will never be executed
