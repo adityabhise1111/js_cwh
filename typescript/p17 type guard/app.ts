@@ -53,4 +53,4 @@ function switchoffer(remote :tvKaRemote |carKaRemote){
 
 console.log(switchoffer(remote1));
 console.log(switchoffer(remote2));
-console.log(switchoffer({})); // this will throw an error
+//console.log(switchoffer({})); // this will throw an error
