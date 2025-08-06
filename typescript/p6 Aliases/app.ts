@@ -8,10 +8,29 @@ function printUserData(data: udata): void {
 
 // Example usage
 printUserData(42); // number
-printUserData("Hello"); // string
+printUserData("Hello"); // string 
 printUserData(true); // boolean
 
 // union & intersection types
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //union example
 type User1 = {
