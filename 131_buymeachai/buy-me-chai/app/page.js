@@ -83,8 +83,7 @@ export default function Home() {
         <h1 className="text-2xl  font-bold text-center my-4">Learn more about our platform</h1>
         <div className="flex gap-5 justify-around mx-20 my-10 ">
           <div className="item space-y-3 flex flex-col items-center justify-center">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/QtaorVNAwbI?si=O_zLJkiQBefPMpBY" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen>
-            </iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/RLrrnasc3P8?si=lzA0jzdpIT4G1gLl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             <p className="text-white">Fund Yourself</p>
             <p className="text-white">Fans are available to help you</p>
           </div>
