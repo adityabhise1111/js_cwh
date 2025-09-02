@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 
 
 
-const login = () => {
+const Login = () => {
     const { data: session } = useSession()
     const router = useRouter()
 
@@ -59,4 +59,4 @@ const login = () => {
         </div>
     )
 }
-export default login
+export default Login
