@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { updateProfile, fetchUser } from "@/actions/useractions";
 import { useRouter } from "next/navigation";
