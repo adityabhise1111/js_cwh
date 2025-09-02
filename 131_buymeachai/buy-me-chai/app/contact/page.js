@@ -60,7 +60,7 @@ useEffect(() => {
             Get in Touch
           </h1>
           <p className="text-xl mb-8 text-gray-300 leading-relaxed">
-            Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+            Have questions? We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible.
           </p>
           <div className="flex justify-center space-x-4">
             <BiChat className="text-3xl text-blue-400" />
@@ -80,14 +80,14 @@ useEffect(() => {
           <div className="space-y-8">
             <div>
               <h2 className="text-3xl font-bold mb-4">Send us a Message</h2>
-              <p className="text-gray-300">Fill out the form below and we'll get back to you within 24 hours.</p>
+              <p className="text-gray-300">Fill out the form below and we&apos;ll get back to you within 24 hours.</p>
             </div>
 
             {isSubmitted ? (
               <div className="bg-green-600/20 border border-green-600 rounded-lg p-8 text-center">
                 <BsCheckCircleFill className="text-5xl text-green-400 mx-auto mb-4" />
                 <h3 className="text-2xl font-semibold mb-2">Message Sent!</h3>
-                <p className="text-gray-300">Thank you for reaching out. We'll get back to you soon.</p>
+                <p className="text-gray-300">Thank you for reaching out. We&apos;ll get back to you soon.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -225,7 +225,7 @@ useEffect(() => {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold mb-1">Business Hours</h3>
-                  <p className="text-gray-300 mb-2">We're here to help</p>
+                  <p className="text-gray-300 mb-2">We&apos;re here to help</p>
                   <p className="text-gray-300">Monday - Friday: 9:00 AM - 6:00 PM</p>
                   <p className="text-gray-300">Weekend: 10:00 AM - 4:00 PM</p>
                 </div>

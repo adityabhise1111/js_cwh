@@ -203,7 +203,7 @@ const PaymentPage = ({ username }) => {
                                 <li key={payment._id || payment.id || index} className='my-4 flex items-start gap-3'>
                                     <img src="user.gif" className='flex-shrink-0' width={40} height={40} alt="user icon" />
                                     <div className='flex-1 text-sm md:text-base'>
-                                        <span className='font-semibold'>{payment.name}</span> donated ₹{payment.amount} with message: "{payment.message}"
+                                        <span className='font-semibold'>{payment.name}</span> donated ₹{payment.amount} with message: &quot;{payment.message}&quot;
                                     </div>
                                 </li>
                                 
