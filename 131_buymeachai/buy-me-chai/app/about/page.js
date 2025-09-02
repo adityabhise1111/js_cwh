@@ -43,8 +43,8 @@ export default function About() {
           </div>
           <div className="lg:w-1/2 space-y-6">
             <p className="text-lg text-gray-300 leading-relaxed">
-              At Buy Me Chai, we're on a mission to democratize creator funding. We believe that great content 
-              and innovative ideas shouldn't be limited by financial constraints.
+              At Buy Me Chai, we&apos;re on a mission to democratize creator funding. We believe that great content 
+              and innovative ideas shouldn&apos;t be limited by financial constraints.
             </p>
             <p className="text-lg text-gray-300 leading-relaxed">
               Just like how a simple cup of chai brings people together in Indian culture, our platform 
