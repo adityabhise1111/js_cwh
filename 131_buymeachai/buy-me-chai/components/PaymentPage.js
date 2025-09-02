@@ -199,8 +199,8 @@ const PaymentPage = ({ username }) => {
                     <div className='text-base md:text-lg w-full lg:w-1/2 bg-slate-900 rounded-lg text-white p-6 md:p-10'>
                         <h3 className='text-lg md:text-xl font-bold mb-4'>Recent Supporters</h3>
                         <ul className='max-h-80 overflow-y-auto'>
-                            {payments.map((payment) => (
-                                <li key={payment._id} className='my-4 flex items-start gap-3'>
+                            {payments.map((payment, index) => (
+                                <li key={payment._id || payment.id || index} className='my-4 flex items-start gap-3'>
                                     <img src="user.gif" className='flex-shrink-0' width={40} height={40} alt="user icon" />
                                     <div className='flex-1 text-sm md:text-base'>
                                         <span className='font-semibold'>{payment.name}</span> donated ₹{payment.amount} with message: "{payment.message}"

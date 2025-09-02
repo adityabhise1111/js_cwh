@@ -44,8 +44,8 @@ export default function Home() {
             </button>
           </div>
           <div className="users flex mx-auto mt-10 gap-5 flex-wrap justify-center">
-            {users.map((user) => (
-              <Card key={user.id} user={user} />
+            {users.map((user, index) => (
+              <Card key={user.id || user._id || user.email || index} user={user} />
             ))}
           </div>
         </div>
