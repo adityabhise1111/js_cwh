@@ -7,6 +7,10 @@ function App() {
   const [count, setCount] = useState(0)
   const a = useRef(0);
 
+  //Both useState and useRef survive re-renders.
+  //Only useState causes a re-render when updated.
+  //to access a DOM element directly (refference)
+
   //when we use useRef the value persist across renders
   //it does not trigger a re-render when the value changes
   //it is useful for keeping track of mutable values that do not require re-rendering
